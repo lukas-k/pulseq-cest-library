@@ -13,15 +13,23 @@ figure(2);
 % M_z = Run_pulseq_cest_Simulation(seq_filename,fullfile(lib_path,'/sim-library/GM_3T_001_bmsim.yaml'));
 % Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset)
 % 
- M_z = Run_pulseq_cest_Simulation(seq_filename,[lib_path '/sim-library/GLIO_3T_002_bmsim.yaml']);
-% 
+sandbox_path='D:\root\LABLOG\FAU\11_CESTpulseq_standard\pulseq-cest-library\sandbox\001_realistic_APTw_3T';
+ M_z = Run_pulseq_cest_Simulation(seq_filename,[sandbox_path '/WM_3T_002_bmsim.yaml']);
  [Z,w]= Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset);
 
- M_z = Run_pulseq_cest_Simulation(seq_filename,[lib_path '/sim-library/GLIO_3T_003_bmsim.yaml']);
-
+ M_z = Run_pulseq_cest_Simulation(seq_filename,[sandbox_path '/GLIO_3T_002_bmsim.yaml']);
  [Z1,w]=Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset);
  
- figure(2), plot(w,(Z1-Z)); set(gca,'xdir','reverse');
+ 
+ %% EMR?
+ figure(3),
+  M_z = Run_pulseq_cest_Simulation(seq_filename,[sandbox_path '/GLIO_3T_002_bmsim.yaml']);
+ [Z,w]= Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset);
+
+ M_z = Run_pulseq_cest_Simulation(seq_filename,[sandbox_path '/GLIO_3T_003_bmsim.yaml']);
+ [Z1,w]=Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset);
+  
+ figure(3), plot(w,(Z1-Z)); set(gca,'xdir','reverse');
  
  
  
