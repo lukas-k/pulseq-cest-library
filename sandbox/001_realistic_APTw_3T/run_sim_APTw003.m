@@ -9,14 +9,19 @@ offsets_ppm = seq.definitions('offsets_ppm'); % offsets
 m0_offset = seq.definitions('M0_offset');     % m0 offset frequency
 
 %% call standard sim
-figure(1);
+figure(2);
 % M_z = Run_pulseq_cest_Simulation(seq_filename,fullfile(lib_path,'/sim-library/GM_3T_001_bmsim.yaml'));
 % Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset)
 % 
- M_z = Run_pulseq_cest_Simulation(seq_filename,[lib_path '/sim-library/GLIO_3T_001_bmsim.yaml']);
+ M_z = Run_pulseq_cest_Simulation(seq_filename,[lib_path '/sim-library/GLIO_3T_002_bmsim.yaml']);
 % 
- Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset)
+ [Z,w]= Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset);
 
- M_z = Run_pulseq_cest_Simulation(seq_filename,[lib_path '/sim-library/WM_3T_002_bmsim.yaml']);
+ M_z = Run_pulseq_cest_Simulation(seq_filename,[lib_path '/sim-library/GLIO_3T_003_bmsim.yaml']);
 
- Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset)
+ [Z1,w]=Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset);
+ 
+ figure(2), plot(w,(Z1-Z)); set(gca,'xdir','reverse');
+ 
+ 
+ 
