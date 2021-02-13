@@ -8,7 +8,7 @@ seq.read(seq_filename);
 offsets_ppm = seq.definitions('offsets_ppm'); % offsets
 m0_offset = seq.definitions('M0_offset');     % m0 offset frequency
 
-%% call standard sim
+%% call standard sim  for WM and GLIO ( with shifted Lorentzian MT)
 figure(2);
 % M_z = Run_pulseq_cest_Simulation(seq_filename,fullfile(lib_path,'/sim-library/GM_3T_001_bmsim.yaml'));
 % Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset)
