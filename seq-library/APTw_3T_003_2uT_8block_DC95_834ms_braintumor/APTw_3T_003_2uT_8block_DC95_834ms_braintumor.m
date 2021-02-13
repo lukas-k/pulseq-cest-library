@@ -23,7 +23,7 @@ seq_defs.Trec          = 3.5             ; % recovery time [s]
 seq_defs.Trec_M0       = 3.5             ; % recovery time before M0 [s]
 seq_defs.M0_offset     = -1560           ; % m0 offset [ppm]
 seq_defs.DCsat         = (2*seq_defs.tp)/(2*seq_defs.tp+sum(seq_defs.td)); % duty cycle
-seq_defs.offsets_ppm   = [seq_defs.M0_offset -4:0.25:4]; % offset vector [ppm]
+seq_defs.offsets_ppm   = [seq_defs.M0_offset -14:0.25:14]; % offset vector [ppm]
 seq_defs.num_meas      = numel(seq_defs.offsets_ppm)   ; % number of repetition
 seq_defs.Tsat          = seq_defs.n_pulses/2*(seq_defs.tp+seq_defs.td(1)) + ...
                          seq_defs.n_pulses/2*(seq_defs.tp+seq_defs.td(2)) - seq_defs.td(2);  % saturation time [s]
@@ -116,8 +116,7 @@ end
 seq.write(seq_filename, author);
 
 %% write sequence
-seq.setDefinition('offsets_ppm',offset_list);
-seq.setDefinition('run_m0_scan', run_m0_scan);
+
 seq.write(seq_filename);
 
 %% plot
@@ -125,6 +124,20 @@ save_seq_plot(seq_filename);
 
 %% call standard sim
 M_z = Run_pulseq_cest_Simulation(seq_filename,'../../sim-library/GM_3T_001_bmsim.yaml');
+
+% read the .seq-file
+seq = mr.Sequence;
+seq.read(seq_filename);
+% get the definitions in the file
+offsets_ppm = seq.definitions('offsets_ppm'); % offsets
+m0_offset = seq.definitions('M0_offset');     % m0 offset frequency
+
+Plot_pulseq_cest_Simulation(M_z,offsets_ppm,m0_offset)
+
+
+
+
+
 
 
 
